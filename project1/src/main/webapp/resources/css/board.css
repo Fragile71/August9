@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+div{
+	
+	
+	
+	
+}
+
+
+table{
+	margin: 0 auto;
+	width: 100%;
+	height: 500px;
+	border-collapse: collapse;
+	width :0 auto;
+	float-align : left;
+	
+}
+
+th{
+	height: 10px;
+	background-color: gray;
+	border: solid 1px;
+}
+
+
+
+.title {
+	text-align: center;
+}
+
+td {
+	border: solid 1px;
+		text-align: center;
+}
+#td1{
+	width: 10%;
+}
+
+#td2{	
+width: 20%	
+}
+
+.title{
+	
+	text-align: center;
+}
+
+tr:hover{
+	background-color: gray;
+	
+}

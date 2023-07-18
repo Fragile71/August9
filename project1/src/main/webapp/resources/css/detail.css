@@ -9,13 +9,17 @@
 }
 
 .title {
-	width: 100%;
-	height: 100px;
-	font-size: x-large;
-	border-bottom: 2px solid black;
-	padding-left: 20px;
-	box-sizing: border-box;
-	background-color:#6D4C41 
+    
+    width: 100%;
+    height: 100px;
+    font-size: x-large;
+    border-bottom: 2px solid black;
+    padding-left: 20px;
+    box-sizing: border-box;
+    background-color: #8C0E03;
+    display: flex;s
+    align-items: center;
+    justify-content: center;
 }
 
 .write {
@@ -26,6 +30,8 @@
 	background-color:#E1F5FE ;
 }
 
+
+	
 
 
 .bwrite, .blike {
@@ -52,7 +58,7 @@
 	height: 500px;
 	min-height:100px;
 	padding: 0;
-	background-color: #CCEEFF;
+	background-color: #C4EEF2;
 	border: 1px solid black;
 	box-sizing: border-box;
 	}

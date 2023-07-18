@@ -17,6 +17,32 @@ public class IndexController {
 	   return "index"; //데이터 붙임없이 index.jsp페이지만 보여줌
 	   
    }
+
+   @GetMapping("/board2")
+   public String board2() {
+	   return "board2";
+   }
+    
+
+   @GetMapping("/mooni")
+   public String mooni() {
+	   return "mooni";
+   }
+   
+
+   @GetMapping("/notice")
+   public String notice() {
+	   return "notice";
+   }
+   
+   
+   
+   
+   @GetMapping("/menu")
+   public String menu() {
+	   return "menu";
+   }
+   
    
    
 }

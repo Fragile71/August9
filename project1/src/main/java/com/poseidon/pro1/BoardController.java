@@ -1,5 +1,7 @@
 package com.poseidon.pro1;
 
+
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -36,7 +38,7 @@ public class BoardController {
 	BoardDTO dto =	boardService.detail(bno);
 	model.addAttribute("dto",dto);
 	
-	
+
 		return "detail";
 	}
 

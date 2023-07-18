@@ -21,10 +21,7 @@ public class BoardDAO {
 		return sqlSession.selectList("board.boardList");
 	}
 
-	public BoardDTO detail(String bno) {
-      
-		
-		
+	public BoardDTO detail(String bno) {		
 		
 		return sqlSession.selectOne("board.detail",bno);//앞에는 네임스페이스.아이디, 값
 	}

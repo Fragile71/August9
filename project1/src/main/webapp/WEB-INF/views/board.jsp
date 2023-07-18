@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -9,12 +8,14 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="./resources/css/board.css">
 
+
+
 </head>
 <body>
+<%@ include file="menu.jsp" %>
+
 	<div>
 	<h1>게시판</h1>
-	<img alt="" src="./img/images.png">
-	<a href="./index">index로 가기</a>
 	
 	<table>
 		<tr>
@@ -22,7 +23,7 @@
 			<th id="td2">제목</th>
 			<th class="title">글쓴이</th>
 			<th>날짜</th>
-			<th>좋아요</th>
+			<th id= "td5">좋아요</th>
 		</tr>
 
 

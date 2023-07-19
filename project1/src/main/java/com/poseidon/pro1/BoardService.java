@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service("boardService")
@@ -15,6 +16,9 @@ public class BoardService {
 	@Named("boardDAO")
 	private BoardDAO boardDAO;
 
+	@Autowired
+	private Util util;
+
 	// 보드 리스트 불러오는 메소드
 	public List<Map<String, Object>> boardList() {
 
@@ -23,7 +27,49 @@ public class BoardService {
 	}
 
 	public BoardDTO detail(String bno) {
-	
-		return boardDAO.detail(bno) ;
+		BoardDTO dto = boardDAO.detail(bno);
+		// 아이피 뽑을수있을까.. 하트로바꿔줘
+		if (dto.getbip() != null && dto.getbip().indexOf(".") != -1) {
+			String ip = dto.getbip();
+			String[] piece1 = ip.split("\\.");
+			String secondValue = piece1[1];
+
+			String replacedIp = ip.replace(secondValue, "♡");
+
+			dto.setbip(replacedIp);
+		}
+		return dto;
 	}
+
+	public void write(BoardDTO dto) {
+
+		// btitle을 꺼내줍니다.
+
+		String btitle = dto.getBtitle();
+
+		btitle = util.exchange(btitle);
+
+		dto.setbip(util.getIp());
+		// XSS공격들어온거 처리해주고 set
+		dto.setBtitle(btitle);
+
+		boardDAO.write(dto);
+	}
+
+	public void delete(BoardDTO dto) {
+		boardDAO.delete(dto);
+
+	}
+
+//		  @Autowired
+
+//		  
+//		  
+//		  
+//	  String title = dto.getBtitle(); title = title.replaceAll("<", "&lt;"); title
+//	  = title.replaceAll(">", "&gt;");
+//	  
+//	 dto.setBtitle(title); boardDAO.write(dto); // 실행만 시키고 결과를 받지 않습니다. // Select를
+//	 // 제외한 나머지는 영향받은 행의 수(int)를 받아오기도 합니다. }
+
 }

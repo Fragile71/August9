@@ -35,13 +35,13 @@ public class IndexController {
 	   return "notice";
    }
    
-   
-   
-   
-   @GetMapping("/menu")
-   public String menu() {
-	   return "menu";
+   @GetMapping("/error404")
+   public String error() {
+	   System.out.println("404!!");
+	   return "";
    }
+   
+   
    
    
    

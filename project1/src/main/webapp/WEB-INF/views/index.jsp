@@ -5,6 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+<link rel="icon" href="./img/favicon.ico" type="image/x-icon">
+
+
+
 </head>
 <body>
       <h1>index</h1>

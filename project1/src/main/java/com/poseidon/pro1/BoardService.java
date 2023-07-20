@@ -26,7 +26,7 @@ public class BoardService {
 
 	}
 
-	public BoardDTO detail(String bno) {
+	public BoardDTO detail(int bno) {
 		BoardDTO dto = boardDAO.detail(bno);
 		// 아이피 뽑을수있을까.. 하트로바꿔줘
 		if (dto.getbip() != null && dto.getbip().indexOf(".") != -1) {
@@ -61,6 +61,13 @@ public class BoardService {
 
 	}
 
+	public void edit(BoardDTO dto) {
+		boardDAO.edit(dto);
+		
+	}
+
+	
+ 
 //		  
 //		  
 //		  

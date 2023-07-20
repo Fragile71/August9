@@ -12,6 +12,23 @@
 <link rel="stylesheet" href="./resources/css/menu.css">
 
 <script type="text/javascript">
+	
+	
+	function edit(){
+		if(confirm("수정하시겠습니까?")){
+		location.href = "./edit?bno=${dto.bno }"
+			
+			
+			
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
 	function del() {
 		let chk = confirm("삭제하시겠습니까?"); //참 거짓으로 나옵니다.
 		//alert(chk);
@@ -27,24 +44,21 @@
 	<%@ include file="menu.jsp"%>
 
 
-	
+
 
 
 
 	<div class="content">
 		<div class="title">
-		제목 :
-			${dto.btitle } / ${dto.btitle } <img alt="" src="./img/update.png"
-				width=30px height=30px>&nbsp;<img alt=""
-				src="./img/delete.png" width=30px height=30px onclick="del()">
+			제목 : ${dto.btitle } / ${dto.btitle } <img alt=""
+				src="./img/update.png" onclick="edit()" width=30px height=30px>&nbsp;<img
+				alt="" src="./img/delete.png" width=30px height=30px onclick="del()">
 		</div>
 		<div class="write">
 			<div class="bwrite">글쓴이 : ${dto.bwrite }</div>
 			<div class="blike">${dto.blike }</div>
 		</div>
-		<div class="date">
-		 작성일자 : ${dto.bdate }
-		</div>
+		<div class="date">작성일자 : ${dto.bdate }</div>
 		<div class="ip">ip주소 : ${dto.bip }</div>
 		<div class="bcontent">${dto.bcontent }</div>
 	</div>

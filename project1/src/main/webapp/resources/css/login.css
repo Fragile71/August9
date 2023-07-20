@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.login {
+	margin: 0 auto;
+	width:25% ;
+	text-align: center;
+	border: solid 1px;
+	border-radiu
+	s: 15%;
+}
+
+.pw{
+	
+	margin: 5px;
+}

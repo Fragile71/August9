@@ -113,7 +113,7 @@ public class BoardController {
 	public String edit(BoardDTO dto) {
 		
 		
-     boardService.edit(dto);		
+     boardService.edit(dto);	
 		
 		
 		return "redirect:detail?bno="+dto.getBno();//보드로 이동하게 해주세요

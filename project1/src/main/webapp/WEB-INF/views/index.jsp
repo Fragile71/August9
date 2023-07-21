@@ -13,7 +13,9 @@
 
 </head>
 <body>
+<%@ include file="menu.jsp" %>
       <h1>index</h1>
-      <a href="./board">보드로 가기</a>
+      <%=request.getHeader("User-Agent") %>
+      
 </body>
 </html>

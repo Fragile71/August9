@@ -25,10 +25,12 @@ nav ul {
 nav li {
 	list-style: none; /* li앞에 원을 없애줍니다. */
 	float: left; /* 한줄로 표시해 */
+	min-width: 50px;
 	width: 200px;
 	height: 50px;
 	line-height: 50px;
 	text-align: center;
+	position: relative;
 }
 
 nav li:hover {

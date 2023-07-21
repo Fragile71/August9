@@ -5,17 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="./resources/css/login.css">
+<link rel="stylesheet" href="./css/login.css">
 </head>
 <body>
 	<%@ include file="menu.jsp"%>
 <div class="login">
 <h1>로그인</h1>
 
-<div class="id"><input type="text" name="id" placeholder="ID" ></div>
+<form action="./login" method="post">
+<div class="id"><input type="text" name="id" placeholder="ID"  required="required"></div>
 <div class="pw"><input type="password" name="password" placeholder="PASSWORD"></div>
 
 <button>로그인하기 </button>
+</form>
+
 </div>
 
 

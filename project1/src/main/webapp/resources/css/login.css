@@ -2,13 +2,18 @@
 
 .login {
 	margin: 0 auto;
-	width:25% ;
+	width:250px ;
 	text-align: center;
 	border: solid 1px;
-	border-radiu
-	s: 15%;
+	border-radius: 15%;
+    box-sizing: border-box;
 }
 
+button{
+	margin: 5px;
+	
+	
+}
 .pw{
 	
 	margin: 5px;

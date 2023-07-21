@@ -10,7 +10,7 @@ public class IndexController {
 	
 	
 	// 첫화면 로딩 : index.jsp호출
-   @GetMapping(value = {"/", "/index", })
+   @GetMapping(value = {"/","/index"})
    public String index() {
 	   //서비스에서 값 가져오기
 	   

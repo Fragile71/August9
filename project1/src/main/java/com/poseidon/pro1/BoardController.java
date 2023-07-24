@@ -2,6 +2,7 @@ package com.poseidon.pro1;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,19 +42,35 @@ public class BoardController {
 		int bno = util.strToInt(request.getParameter("bno"));
 		// bno에 요청하는 값이 있습니다. 이 값을 db까지 보내겠습니다.
 		// System.out.println("bno : " + bno);
-		BoardDTO dto = boardService.detail(bno);
-		model.addAttribute("dto", dto);
+
+		
+		
+		
+		BoardDTO dto = new BoardDTO();
+		dto.setBno(bno);
+		
+		
+		BoardDTO result = boardService.detail(dto);
+		model.addAttribute("dto", result);
 
 		return "detail";
 	}
 
 	@GetMapping("/write")
-	public String write() {
-		return "write";
+	public String write(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		if(session.getAttribute("mname")!= null) {
+			
+			return "write";
+		}
+		else {
+		
+		
+		return "redirect:/login";}  //슬러시 넣어주세요.
 	}
 
 	@PostMapping("/write")
-	public String write(HttpServletRequest request) {
+	public String write2(HttpServletRequest request) {
 		// 사용자가 입력한 데이터 변수에 담기
 
 //		  request.setCharacterEncoding("UTF-8");
@@ -63,20 +80,34 @@ public class BoardController {
 
 		// Service -> DAO -> mybatis -> DB로 보내서 저장하기
 
-		
+		HttpSession session = request.getSession();
+	    if(session.getAttribute("mid")!= null) {
+	    	
+	    	
+			
 		BoardDTO dto = new BoardDTO();
 		dto.setBtitle(request.getParameter("title"));
 		dto.setBcontent(request.getParameter("content"));
-//		dto.setbip(util.getIp());
-		// 얻어온 ip도 저장해서 데이터베이스로 보내겠습니다.
-
-		dto.setBwrite("밍키");// 이건 임시로 적었습니다. 로그인 추가되면 변경하겠습니다.
+        //세션에서 불러오겠습니다.
+		dto.setMid((String)session.getAttribute("mid"));
+		dto.setM_name((String)session.getAttribute("mname"));
 
 		// Service -> DAO -> mybatis -> DB로 보내서 저장하기
 		boardService.write(dto);
 
-		return "redirect:board"; // 다시 컨트롤러 지나가기 GET방식으로 갑니다.
-	}
+		return "redirect:/board"; // 다시 컨트롤러 지나가기 GET방식으로 갑니다.
+	
+	    }
+	    	
+	    	
+	    	
+	    else {
+	    	
+	    	return "redirect:/login";
+	    }
+	}		
+				
+		
 
 //삭제가 들어온다면 http://172.30.95/delete?bno=280
 	@GetMapping("/delete")
@@ -96,14 +127,29 @@ public class BoardController {
 
 	@GetMapping("/edit")
 	public ModelAndView edit(HttpServletRequest request) {
+		HttpSession session = request.getSession();
 		ModelAndView mv = new ModelAndView(); // edit.jsp
 		mv.setViewName("edit");
-		// 데이터베이스에 bno 를 보내서 dto를 얻어옵니다.
-		// mv에 실어보냅니다.
+		
 
-		BoardDTO dto = boardService.detail(util.strToInt(request.getParameter("bno"))); 
-		// mv에 실어보냅니다.
-		mv.addObject("dto", dto);
+		BoardDTO dto = new BoardDTO();
+		
+		dto.setBno(util.strToInt(request.getParameter("bno")));
+		
+		dto.setMid((String)session.getAttribute("mid"));
+		
+		
+		// 데이터베이스에 bno 를 보내서 dto를 얻어옵니다.
+        
+		BoardDTO result = boardService.detail(dto);
+		
+//		BoardDTO dto = boardService.detail(util.strToInt(request.getParameter("bno"))); 
+
+		
+
+
+		
+		mv.addObject("dto", result);
 
 		return mv;
 

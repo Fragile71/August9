@@ -31,6 +31,7 @@ public class LoginController {
 //request는 jsp에서주는값
 
 		LoginDTO dto = new LoginDTO();
+   
 		dto.setM_id(request.getParameter("id"));
 		dto.setM_pw(request.getParameter("password"));
 // id,pw를 보냈을때 무엇이 오는게 좋을까.
@@ -46,7 +47,7 @@ public class LoginController {
 			HttpSession session = request.getSession();
 			session.setAttribute("mname", result.getM_name()); // result에는 mappers select m_name과 count밖에 없어서..
 			session.setAttribute("mid", dto.getM_id());
-
+    
 //			System.out.println(result.getM_name());
 //			System.out.println(dto.getM_id());
 			// 세션 : 서버, 쿠키: 클라이언트

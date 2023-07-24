@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
     <mapper namespace="board">
-	<select id="boardList"  resultType="Map">
+	<select id="boardList"  resultType="boardDTO">
 		SELECT * 
 		FROM board
 		ORDER BY bno DESC
@@ -11,15 +11,20 @@
 	</select>
 
     <!--#{변수명}을 적어주면 값이들어감-->
-   <select id="detail" parameterType="Integer" resultType="boardDTO">
-   SELECT * FROM board WHERE bno=#{bno} 
+   <select id="detail" parameterType="boardDTO" resultType="boardDTO">
+   SELECT * FROM boardview 
+   WHERE bno=#{bno} 
+   <if test = "mid != null">
    
+   AND m_id=#{mid}
    
+   </if>
    </select>
 <!-- inert는 result가 없습니다. -->
+<!-- 서브 쿼리: 쿼리 속에 쿼리가 들어가요 -->
 <insert id="write" parameterType="boardDTO">
-   INSERT INTO board(btitle, bcontent, bwrite, bip)
-   VALUES(#{btitle},#{bcontent},#{bwrite}, #{bip})
+   INSERT INTO board(btitle, bcontent, m_no, bip)
+   VALUES(#{btitle},#{bcontent},(SELECT m_no FROM member WHERE m_id=#{mid}), #{bip})
 </insert>
 
 <delete id="delete" parameterType="boardDTO">

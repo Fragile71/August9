@@ -2,14 +2,14 @@ package com.poseidon.pro1;
 
 public class BoardDTO {
 	private int bno, blike;
-	private String btitle, bwrite, bcontent, bdate, bip;
+	private String btitle, m_name, bcontent, bdate, mid, bip;
 
-	public String getbip() {
-		return bip;
+	public String getMid() {
+		return mid;
 	}
 
-	public void setbip(String bip) {
-		this.bip = bip;
+	public void setMid(String mid) {
+		this.mid = mid;
 	}
 
 	public int getBno() {
@@ -36,12 +36,12 @@ public class BoardDTO {
 		this.btitle = btitle;
 	}
 
-	public String getBwrite() {
-		return bwrite;
+	public String getM_name() {
+		return m_name;
 	}
 
-	public void setBwrite(String bwrite) {
-		this.bwrite = bwrite;
+	public void setM_name(String m_name) {
+		this.m_name = m_name;
 	}
 
 	public String getBcontent() {
@@ -59,4 +59,13 @@ public class BoardDTO {
 	public void setBdate(String bdate) {
 		this.bdate = bdate;
 	}
+
+	public String getBip() {
+		return bip;
+	}
+
+	public void setBip(String bip) {
+		this.bip = bip;
+	}
+
 }

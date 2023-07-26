@@ -46,7 +46,7 @@ public class LoginController {
 			// 세션을 만들어서 로그인을 지정 시간동안 유지시킵니다.
 			HttpSession session = request.getSession();
 			session.setAttribute("mname", result.getM_name()); // result에는 mappers select m_name과 count밖에 없어서..
-			session.setAttribute("mid", dto.getM_id());
+			session.setAttribute("mid", request.getParameter("id"));
     
 //			System.out.println(result.getM_name());
 //			System.out.println(dto.getM_id());

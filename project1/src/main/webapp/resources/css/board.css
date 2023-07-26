@@ -25,6 +25,37 @@ th{
 }
 
 
+.page-div{
+	text-align: center;
+	margin : 20px;
+   	
+	padding: 0;
+	
+}
+.page-div a{
+	
+  text-decoration: none;
+  color: #424242;
+  margin: 10px;
+	padding: 0;
+	
+}
+
+strong{
+	
+ 
+
+}
+
+
+.page-div img{
+	
+	width: 40px;
+	height: 22px;
+	vertical-align: bottom;
+}
+
+
 
 .title {
 	text-align: center;
@@ -35,15 +66,15 @@ td {
 	border-bottom: dashed 1px;
 		text-align: center;
 }
-#td1{
+.td1{
 	width: 10%;
 }
 
-#td2{	
+.td2{	
 width: 20%;	
 }
 
-#td5{
+.td5{
 width: 10%;	
 	
 }

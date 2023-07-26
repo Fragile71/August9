@@ -32,13 +32,14 @@ public class IndexController {
 
    @GetMapping("/notice")
    public String notice() {
+	
 	   return "notice";
    }
    
    @GetMapping("/error404")
    public String error() {
-	   System.out.println("404!!");
-	   return "";
+	
+	   return "/error404";
    }
    
    

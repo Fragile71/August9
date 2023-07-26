@@ -19,23 +19,35 @@ public class BoardService {
 	private Util util;
 
 	// 보드 리스트 불러오는 메소드
-	public List<BoardDTO> boardList() {
+	public List<BoardDTO> boardList(PageDTO page) {
 
-		return boardDAO.boardList();
+		return boardDAO.boardList(page);
 
 	}
 
 	public BoardDTO detail(BoardDTO dto2) {
+		//좋아요수 +1하기 기능을 넣어주겠습니다.
+		boardDAO.LikeUp(dto2);
+		
+		
 		BoardDTO dto = boardDAO.detail(dto2);
-		// 아이피 뽑을수있을까.. 하트로바꿔줘
-		if (dto.getBip() != null && dto.getBip().indexOf(".") != -1) {
-			String ip = dto.getBip();
-			String[] piece1 = ip.split("\\.");
-			String secondValue = piece1[1];
 
-			String replacedIp = ip.replace(secondValue, "♡");
+		//System.out.println(dto);
+		//System.out.println(dto.getBno());
+		//System.out.println(dto.getBip());
 
-			dto.setBip(replacedIp);
+		if (dto2.getBip() != null) {// 내 글이 아닐때 null들어옵니다. 즉, null이 아닐때라고 검사해주세요.
+
+			if (dto.getBip() != null && dto.getBip().indexOf(".") != -1) {
+				String ip = dto.getBip();
+				String[] piece1 = ip.split("\\.");
+				String secondValue = piece1[1];
+
+				String replacedIp = ip.replace(secondValue, "♡");
+
+				dto.setBip(replacedIp);
+			}
+
 		}
 		return dto;
 	}
@@ -62,11 +74,14 @@ public class BoardService {
 
 	public void edit(BoardDTO dto) {
 		boardDAO.edit(dto);
+
+	}
+//전체 글 수 가져오기 
+	public int totalCount() {
 		
+		return boardDAO.totalCount();
 	}
 
-	
- 
 //		  
 //		  
 //		  

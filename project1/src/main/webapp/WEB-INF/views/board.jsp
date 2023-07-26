@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <!DOCTYPE html>
 
 
@@ -9,24 +10,31 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="./resources/css/board.css">
+<link rel="stylesheet" href="./css/board.css">
+<link rel="stylesheet" href="./css/menu.css">
 
+
+<script type="text/javascript">
+	function linkPage(pageNo){
+		location.href = "./board?pageNo="+pageNo;
+	}	
+</script>
 
 </head>
 <body>
 	<%@ include file="menu.jsp"%>
 	<h1>보드</h1>
-	길이 검사: ${fn:length(list) }
+	<%-- 길이 검사: ${fn:length(list) } --%>
 
 	<c:choose>
 		<c:when test="${fn:length(list) gt 0}">
 			<table>
 				<tr>
-					<th id="td1">번호</th>
-					<th id="td2">제목</th>
-					<th class="title">글쓴이</th>
+					<th>번호</th>
+					<th>제목</th>
+					<th>글쓴이</th>
 					<th>날짜</th>
-					<th id="td5">좋아요</th>
+					<th>좋아요</th>
 				</tr>
 
 
@@ -43,6 +51,11 @@
 					</tr>
 				</c:forEach>
 			</table>
+		<div class="page-div"><ui:pagination paginationInfo = "${paginationInfo}" type="image" jsFunction="linkPage"/></div>	
+			
+			
+			
+			
 		</c:when>
 		<c:otherwise>출력할 데이터가 없습니다.   </c:otherwise>
 

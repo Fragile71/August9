@@ -38,25 +38,26 @@
 
 
 	<!-- 한글설정하기 -->
-   <filter>
-      <filter-name>encoding-filter</filter-name>
-      <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-      <init-param>
-         <param-name>encoding</param-name>
-         <param-value>UTF-8</param-value>
-      </init-param>
-   </filter>
-   <filter-mapping>
-      <filter-name>encoding-filter</filter-name>
-      <url-pattern>/*</url-pattern>
-   </filter-mapping>
+	<filter>
+		<filter-name>encoding-filter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encoding-filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
 
 
 	<!-- 에러페이지 -->
 	<error-page>
 		<error-code>404</error-code>
-		<loaction>/error404</loaction>
+		<location>/error404</location>
 	</error-page>
 
 

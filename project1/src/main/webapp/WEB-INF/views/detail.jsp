@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.util.Date"%>
 
@@ -41,14 +42,15 @@
 
 	<div class="content">
 		<div class="title">
-			제목 : ${dto.bno } / ${dto.btitle } 
-			<c:if test="${sessionScope.mid ne null && sessionScope.mid eq dto.mid}">
-		<img alt="" src="./img/update.png"
-				onclick="edit()" width=30px height=30px>&nbsp;<img alt=""
-				src="./img/delete.png" width=30px height=30px onclick="del()">
-			
-			</c:if>
-			
+			제목 : ${dto.bno } / ${dto.btitle }
+		
+			<c:if test="${sessionScope.mid eq dto.m_id}">
+				<img alt="" src="./img/update.png" onclick="edit()" width=30px
+					height=30px>&nbsp;<img alt="" src="./img/delete.png"
+					width=30px height=30px onclick="del()">
+
+			 </c:if> 
+
 		</div>
 		<div class="write">
 			<div class="bwrite">글쓴이 : ${dto.m_name }</div>
@@ -59,7 +61,12 @@
 		<div class="bcontent">${dto.bcontent }</div>
 	</div>
 
-
+<div class="comment">
+<form action="./detail" method="post">
+<input type="text" name="comment" id=comment>
+<button class="btn2" type="submit" onclick="return check()">댓글쓰기</button>
+</form>
+</div>
 
 </body>
 </html>

@@ -43,22 +43,30 @@
 	<%@ include file="menu.jsp"%>
 	<div class="login">
 		<h1>로그인</h1>
+		<div class="login-form">
+			<form action="./login" method="post">
+				<div class="id">
+					<input type="text" name="id" id="ID" placeholder="ID"
+						required="required" maxlength="10" onchange="checkID()">
+				</div>
+				<div class="pw">
+					<input type="password" name="password" id="PW"
+						placeholder="PASSWORD">
+				</div>
 
-		<form action="./login" method="post">
-			<div class="id">
-				<input type="text" name="id" id="ID" placeholder="ID"
-					required="required" maxlength="10" onchange="checkID()">
-			</div>
-			<div class="pw">
-				<input type="password" name="password" id="PW"
-					placeholder="PASSWORD">
-			</div>
+				<button onclick="return check()">로그인하기</button>
+				<span id="msg"></span>
+			</form>
 
-			<button onclick="return check()">로그인하기</button>
-			<span id="msg"></span>
-		</form>
+아이디 찾기 | 비밀번호 찾기<button onclick="location.href='./join'"> 회원가입 </button>
+		</div>
+
 
 	</div>
+
+
+
+
 
 
 </body>

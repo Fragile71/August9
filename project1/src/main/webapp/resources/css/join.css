@@ -1,0 +1,26 @@
+@charset "UTF-8";
+.signup{
+	text-align: center;
+	margin: 0 auto;
+		
+	width:250px ;
+	
+	border: 4px groove black;
+	border-radius: 15%;
+    box-sizing: border-box;
+	
+}
+
+.signup2{
+	text-align: center;
+}
+
+
+#ID,#PW,#NAME,#ADDR,#BDATE,#성별{
+	margin: 5px;
+	 border: 1px solid gray;
+}
+
+button{
+	margin: 10px;
+}

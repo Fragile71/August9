@@ -30,9 +30,9 @@
 	<!-- inert는 result가 없습니다. -->
 	<!-- 서브 쿼리: 쿼리 속에 쿼리가 들어가요 -->
 	<insert id="write" parameterType="boardDTO">
-		INSERT INTO board(btitle, bcontent, m_no, bip)
+		INSERT INTO board(btitle, bcontent, m_no, bip, uuid)
 		VALUES(#{btitle},#{bcontent},(SELECT m_no FROM member WHERE
-		m_id=#{m_id}), #{bip})
+		m_id=#{m_id}), #{bip}, #{uuid})
 	</insert>
 
 	<delete id="delete" parameterType="boardDTO">

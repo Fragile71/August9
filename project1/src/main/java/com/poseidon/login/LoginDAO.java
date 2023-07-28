@@ -1,4 +1,6 @@
-package com.poseidon.pro1;
+package com.poseidon.login;
+
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,4 +17,14 @@ public class LoginDAO {
 		return sqlsession.selectOne("login.login", dto);
 	}
 
+	public int join(JoinDTO joinDTO) {
+
+		return sqlsession.insert("login.join", joinDTO);
+	}
+
+	public List<JoinDTO> members(){
+		return sqlsession.selectList("login.members");
+	}
+
+	
 }

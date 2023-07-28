@@ -1,4 +1,6 @@
-package com.poseidon.pro1;
+package com.poseidon.login;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -7,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.poseidon.util.Util;
 
 @Controller
 public class LoginController {
@@ -31,7 +36,7 @@ public class LoginController {
 //request는 jsp에서주는값
 
 		LoginDTO dto = new LoginDTO();
-   
+
 		dto.setM_id(request.getParameter("id"));
 		dto.setM_pw(request.getParameter("password"));
 // id,pw를 보냈을때 무엇이 오는게 좋을까.
@@ -47,7 +52,7 @@ public class LoginController {
 			HttpSession session = request.getSession();
 			session.setAttribute("mname", result.getM_name()); // result에는 mappers select m_name과 count밖에 없어서..
 			session.setAttribute("mid", request.getParameter("id"));
-    
+
 //			System.out.println(result.getM_name());
 //			System.out.println(dto.getM_id());
 			// 세션 : 서버, 쿠키: 클라이언트
@@ -58,36 +63,63 @@ public class LoginController {
 		}
 
 	}
-	
-	
+
+
+
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
-	
-		if(session.getAttribute("mname")!=null) {
-		
+
+		if (session.getAttribute("mname") != null) {
+
 //session.invalidate(); //세션 모두 삭제하기
 			session.removeAttribute("mname");
 		}
-		if(session.getAttribute("mid")!=null) {
+		if (session.getAttribute("mid") != null) {
 //session.invalidate(); //세션 모두 삭제하기
 			session.removeAttribute("mid");
 		}
-	
-		session.setMaxInactiveInterval(0);//세션 유지시간을 0으로 = 종료시키기
-		
-	    session.invalidate();//세션 초기화 = 종료 = 세션의 모든 속성 값을 제거
-		
-		
+
+		session.setMaxInactiveInterval(0);// 세션 유지시간을 0으로 = 종료시키기
+
+		session.invalidate();// 세션 초기화 = 종료 = 세션의 모든 속성 값을 제거
+
 		return "redirect:/index";
 	}
 	
 	
+	@GetMapping("/join")
+	  public String join() {
+		
+		
+		return "/join";
+	}
 	
+	@PostMapping("/join")
+	public String join(JoinDTO joinDTO) {
+		System.out.println("jsp에서 오는 값 :" + joinDTO.getGender());
+		System.out.println("jsp에서 오는 값 :" + joinDTO.getBirth());
+		int result = loginService.join(joinDTO);
+		
+		System.out.println(result);
+		if(result == 1) {
+			return "redirect:/login";
+		}else { 
+			return "/join";
+		}
+		
+		
+	}
 	
-	
-	
-	
-	
+	@GetMapping("/members")
+	public ModelAndView members() {
+		ModelAndView mv = new ModelAndView("members");
+		List<JoinDTO> list = loginService.members();
+		mv.addObject("list", list);
+		
+		
+		
+		return mv;
+	}
 	
 	
 	

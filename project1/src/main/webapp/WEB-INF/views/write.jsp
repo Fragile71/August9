@@ -29,13 +29,13 @@
 function check(){
 let title = document.getElementById("title");
 let content = document.getElementById("content");
-if (title.value.length < 10) {
-	alert("10글자이상쓰세요.")
+if (title.value.length < 3) {
+	alert("3글자이상쓰세요.")
 	title.focus();
 	return false;
 
-if (content.value.length < 10) 
-	alert("10글자이상쓰세요")
+if (content.value.length < 3) 
+	alert("3글자이상쓰세요")
 	content.focus();
 	return false;
 

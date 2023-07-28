@@ -1,4 +1,4 @@
-package com.poseidon.pro1;
+package com.poseidon.util;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

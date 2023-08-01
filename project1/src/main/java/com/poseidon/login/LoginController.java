@@ -38,13 +38,13 @@ public class LoginController {
 		LoginDTO dto = new LoginDTO();
 
 		dto.setM_id(request.getParameter("id"));
-		dto.setM_pw(request.getParameter("password"));
+		dto.setM_pw(request.getParameter("pw"));
 // id,pw를 보냈을때 무엇이 오는게 좋을까.
 // 이름 + count(*)
 		LoginDTO result = loginService.login(dto);
 
 		System.out.println(request.getParameter("id"));
-		System.out.println(request.getParameter("password"));
+		System.out.println(request.getParameter("pw"));
 //result는 LoginDTO에서 주는값
 
 		if (result.getCount() == 1) {

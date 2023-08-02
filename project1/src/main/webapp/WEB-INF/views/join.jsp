@@ -10,43 +10,56 @@
 <script src="./js/jquery-3.7.0.min.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$("#idCheck").click(function() {
-			let id = $("#id").val();
-			if (id == "" || id.length < 5) {
-				
-                
-				$("#resultMSG").text("아이디는 5글자 이상이어야 합니다.");
-				$("#resultMSG").css("color", "red");
-				$("#id").focus();
-                return false;
-                
-			}else{
-				$.ajax({
-					url: "./checkID",
-					type: "post",
-					data: {"id":id},   // checkID?id=poseidon
-				    dataType: "html",   
-					success: function(data){
-						$("#resultMSG").text("data : "+ data);
-						
-					},
-					error: function(request, status, error){
-						
-						$("#resultMSG").text("error : " + error);
-					    console.log(error);
+		$("#idCheck").click(
+				function() {
+					let id = $("#id").val();
+
+					if (id == "" || id.length < 5) {
+
+						$("#resultMSG").text("아이디는 5글자 이상이어야 합니다.");
+						$("#resultMSG").css("color", "red");
+						$("#resultMSG").css("font-weight", "bold");
+						$("#resultMSG").css("font-size", "15pt");
+
+						$("#id").focus();
+						return false;
+
+					} else {
+						$.ajax({
+							url : "./checkID",
+							type : "post",
+							data : {"id" : id},
+							
+							dataType : "json", // {result : 0}  
+							success : function(data) {
+								alert(data.result);
+
+								if (data.result == 1) {
+									$("#id").css("background-color", "red")
+											.focus();
+									$("#resultMSG").css("color", "red").text("이미 등록된 아이디입니다.");
+
+								} else {
+									$("#id").css("background-color", "white");
+									$("#resultMSG").text("가입 가능").css("color","green");
+
+								}
+
+								//	$("#resultMSG").text("성공시 결과값 : "+ data);
+
+							},
+							error : function(request, status, error) {
+
+								$("#resultMSG").text("오류가 발생하였습니다. 가입할 수 없습니다.");
+								console.log(error);
+							}
+
+						});
+
 					}
-					
-					
+
+					return false;
 				});
-				
-				
-				
-				$("#resultMSG").text(" 5글자 이상으로 들어왔습니다.")
-				$("#resultMSG").css("color", "green");
-			}
-			
-            return false;
-		});
 
 	});
 </script>
@@ -62,7 +75,7 @@
 					<input type="text" name="id" id="id" placeholder="아이디를 입력하세요"
 						required="required" maxlength="10" onchange="checkID()">
 					<button id="idCheck">중복검사</button>
-					<span id="resultMSG"></span>
+					<br> <span id="resultMSG"></span>
 
 				</div>
 

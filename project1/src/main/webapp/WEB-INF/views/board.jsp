@@ -15,9 +15,9 @@
 
 
 <script type="text/javascript">
-	function linkPage(pageNo){
-		location.href = "./board?pageNo="+pageNo;
-	}	
+	function linkPage(pageNo) {
+		location.href = "./board?pageNo=" + pageNo;
+	}
 </script>
 
 </head>
@@ -44,29 +44,38 @@
 					<!-- onclick 자바스크립트 페이지이동, URL?파라미터=값 -->
 					<tr onclick="location.href='./detail?bno=${row.bno }'">
 						<td class="td1">${row.bno }</td>
-						<td class="title">${row.btitle }</td>
+						<td class="title">${row.btitle } 
+						<span>
+					<c:if test="${row.commentcount gt 0 }">(${row.commentcount })</c:if>
+						</span>
+						</td>
 						<td class="td1">${row.m_name }</td>
 						<td class="td2">${row.bdate }</td>
 						<td class="td1">${row.blike }</td>
 					</tr>
 				</c:forEach>
 			</table>
-		<div class="page-div"><ui:pagination paginationInfo = "${paginationInfo}" type="image" jsFunction="linkPage"/></div>	
-			
-			
-			
-			
+			<div class="page-div">
+				<ui:pagination paginationInfo="${paginationInfo}" type="image"
+					jsFunction="linkPage" />
+			</div>
+
+
+
+
 		</c:when>
 		<c:otherwise>출력할 데이터가 없습니다.   </c:otherwise>
 
 	</c:choose>
+	
+	
 
 
 
 
 	<div>
 
-		로그인한 이름: ${sessionScope.mname } /  ${sessionScope.mid }
+		로그인한 이름: ${sessionScope.mname } / ${sessionScope.mid }
 
 		<c:if test="${sessionScope.mname ne null }">
 			<button onclick="location.href='./write'">글쓰기</button>
@@ -76,7 +85,7 @@
 
 
 
-		
+
 	</div>
 </body>
 </html>

@@ -143,7 +143,7 @@
 
 			<div class="label-row lrbtn">
 				<button type='reset'>취소</button>
-				<button type='button'>가입하기</button>
+				<button type='submit'>가입하기</button>
 			</div>
 
 

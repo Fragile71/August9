@@ -1,9 +1,16 @@
 package com.poseidon.board;
 
 public class BoardDTO {
-	private int bno, blike;
+	private int bno, blike, commentcount;
 	private String btitle, m_name, bcontent, bdate, m_id, bip, uuid;
 	
+	
+	public int getCommentcount() {
+		return commentcount;
+	}
+	public void setCommentcount(int commentcount) {
+		this.commentcount = commentcount;
+	}
 	public String getUuid() {
 		return uuid;
 	}

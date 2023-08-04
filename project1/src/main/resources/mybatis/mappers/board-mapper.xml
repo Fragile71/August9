@@ -35,10 +35,12 @@
 		m_id=#{m_id}), #{bip}, #{uuid})
 	</insert>
 
-	<delete id="delete" parameterType="boardDTO">
-		DELETE FROM board WHERE bno=#{bno} AND m_no=(SELECT m_no FROM member where
+	<update id="delete" parameterType="boardDTO">
+		
+		update board SET bdel = 0 WHERE
+		 bno=#{bno} AND m_no=(SELECT m_no FROM member where
 		m_id=#{m_id} )
-	</delete>
+	</update>
 
 	<update id="edit" parameterType="boardDTO">
 		UPDATE board SET btitle=#{btitle}, bcontent=#{bcontent} WHERE bno=#{bno}
@@ -49,5 +51,10 @@
 		UPDATE board SET blike = blike + 1
 		WHERE bno=#{bno }
 	</update>
+	
+	<select id="commentsList" parameterType="Integer" resultType= "Map">
+	SELECT * FROM commentsview where bno=#{bno}
+	
+	</select>
 
 </mapper>

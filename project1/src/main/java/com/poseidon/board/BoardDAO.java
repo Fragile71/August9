@@ -32,7 +32,7 @@ public class BoardDAO {
 	}
 
 	public void delete(BoardDTO dto) {
-		sqlSession.delete("board.delete", dto);
+		sqlSession.update("board.delete", dto);
 		
 	}
 
@@ -49,6 +49,10 @@ public class BoardDAO {
 	public int totalCount() {
 		
 		return sqlSession.selectOne("board.totalCount");
+	}
+
+	public List<Map<String, Object>> commentsList(int bno) {
+		return sqlSession.selectList("board.commentsList", bno);
 	}
 
 

@@ -1,6 +1,7 @@
 package com.poseidon.board;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -47,10 +48,10 @@ public class BoardController {
 		
 		int recordCountPerPage = paginationInfo.getRecordCountPerPage();//페이지당 몇개?
 		
-		System.out.println(firstRecordIndex);
-		System.out.println(recordCountPerPage);
-		System.out.println(pageNo);
-		System.out.println(totalCount);
+		//System.out.println(firstRecordIndex);
+		//System.out.println(recordCountPerPage);
+		//System.out.println(pageNo);
+		//System.out.println(totalCount);
  		
 	    PageDTO page = new PageDTO();
 	    page.setFirstRecordIndex(firstRecordIndex);
@@ -84,6 +85,12 @@ public class BoardController {
 		dto.setBno(bno);
 
 		BoardDTO result = boardService.detail(dto);
+        System.out.println(result.getCommentcount());
+        if(result.getCommentcount()>0) {
+        	//데이터베이스에 물어봐서 jsp로 보냅니다.
+           List<Map<String, Object>> commentsList = boardService.commentsList(bno);
+        	model.addAttribute("commentsList", commentsList); 	
+        }        
 		model.addAttribute("dto", result);
 
 		return "detail";

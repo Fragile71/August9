@@ -11,14 +11,17 @@
 
 
 
-	<select id="boardList" parameterType="pageDTO" resultType="boardDTO">
+	<select id="boardList" parameterType="pageDTO"
+		resultType="boardDTO">
 		SELECT *
 		FROM boardview
-		LIMIT #{firstRecordIndex}, #{recordCountPerPage}
+		LIMIT #{firstRecordIndex},
+		#{recordCountPerPage}
 	</select>
 
 	<!--#{변수명}을 적어주면 값이들어감 -->
-	<select id="detail" parameterType="boardDTO" resultType="boardDTO">
+	<select id="detail" parameterType="boardDTO"
+		resultType="boardDTO">
 		SELECT * FROM boardview
 		WHERE bno=#{bno}
 		<if test="m_id != null">
@@ -30,31 +33,43 @@
 	<!-- inert는 result가 없습니다. -->
 	<!-- 서브 쿼리: 쿼리 속에 쿼리가 들어가요 -->
 	<insert id="write" parameterType="boardDTO">
-		INSERT INTO board(btitle, bcontent, m_no, bip, uuid)
-		VALUES(#{btitle},#{bcontent},(SELECT m_no FROM member WHERE
+		INSERT INTO board(btitle,
+		bcontent, m_no, bip, uuid)
+		VALUES(#{btitle},#{bcontent},(SELECT m_no
+		FROM member WHERE
 		m_id=#{m_id}), #{bip}, #{uuid})
 	</insert>
 
 	<update id="delete" parameterType="boardDTO">
-		
+
 		update board SET bdel = 0 WHERE
-		 bno=#{bno} AND m_no=(SELECT m_no FROM member where
+		bno=#{bno} AND m_no=(SELECT m_no FROM member where
 		m_id=#{m_id} )
 	</update>
 
 	<update id="edit" parameterType="boardDTO">
-		UPDATE board SET btitle=#{btitle}, bcontent=#{bcontent} WHERE bno=#{bno}
+		UPDATE board SET
+		btitle=#{btitle}, bcontent=#{bcontent} WHERE bno=#{bno}
 	</update>
 
 
 	<update id="likeUp" parameterType="boardDTO">
-		UPDATE board SET blike = blike + 1
+		UPDATE board SET blike = blike
+		+ 1
 		WHERE bno=#{bno }
 	</update>
-	
-	<select id="commentsList" parameterType="Integer" resultType= "Map">
-	SELECT * FROM commentsview where bno=#{bno}
-	
+
+	<select id="commentsList" parameterType="Integer"
+		resultType="Map">
+		SELECT * FROM commentsview where bno=#{bno}
+
 	</select>
+
+	<update id="cdel" parameterType="Map">
+		UPDATE comments SET c_del = 0 WHERE bno = #{bno} AND c_no = #{cno}
+		AND m_no = (SELECT m_no FROM member WHERE m_id = #{mid})
+	</update>
+
+
 
 </mapper>

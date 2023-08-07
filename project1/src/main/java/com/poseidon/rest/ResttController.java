@@ -3,6 +3,8 @@ package com.poseidon.rest;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +13,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.poseidon.board.BoardService;
 import com.poseidon.login.LoginService;
+import com.poseidon.util.Util;
+
+
 
 @RestController
 public class ResttController {
 
 	@Autowired
 	private LoginService loginService;
+	
+
+	@Autowired
+	   private Util util;
+	   
+	   @Autowired
+	   private BoardService boardService;
 
 	// 아이디 중복검사 2023-08-02
 
@@ -50,4 +63,36 @@ public class ResttController {
 		return json.toString();// 그냥 내보내면 못받음
 	}
 
+	
+	
+	
+	@PostMapping("/cdelR")
+	public String cdelR(@RequestParam Map<String, Object> map, HttpSession session) {
+	int result=0;
+	
+//	if(session.getAttribute("mid") != null) {
+//		  if(map.get("bno") != null && map.get("cno") != null && !map.get("bno").equals("") && !map.get("cno").equals("") && 
+//		            util.isNum(map.get("bno")) && util.isNum(map.get("cno"))) {
+//		            map.put("mid", session.getAttribute("mid"));
+//		            result = boardService.cdel(map);
+//		            System.out.println(result);
+//		            
+//		         }
+//		      }
+	map.put("mid", session.getAttribute("mid"));
+	System.out.println(map);
+	
+	result = boardService.cdel(map);
+	//System.out.println(result);
+	JSONObject json = new JSONObject();
+	json.put("result", result);
+		
+	
+	
+		return json.toString();
+	}
+	
+	
+	
+	
 }

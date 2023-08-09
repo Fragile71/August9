@@ -31,39 +31,37 @@ public class BoardController {
 	@Autowired
 	private Util util; // 우리가 만든 숫자변환을 사용하기 위해서 객체 연결했어요.
 
-	//localhost/board?pageNo=10
+	// localhost/board?pageNo=10
 	@GetMapping("/board")
-	public String board(@RequestParam(value="pageNo", required =false, defaultValue="1")int pageNo, Model model) {
+	public String board(@RequestParam(value = "pageNo", required = false, defaultValue = "1") int pageNo, Model model) {
 		// 서비스에서 값 가져오기
-		//페이지네이션 인포 -> 값 넣고 -> DB -> JSP
+		// 페이지네이션 인포 -> 값 넣고 -> DB -> JSP
 		PaginationInfo paginationInfo = new PaginationInfo();
-		paginationInfo.setCurrentPageNo(pageNo); //현재 페이지 번호
-		paginationInfo.setRecordCountPerPage(10); //현재 페이지 글개수
-		paginationInfo.setPageSize(10); //페이징 리스트의 사이즈
-		//전체 글 수 가져오는 명령문장
-        int totalCount = boardService.totalCount();
-		paginationInfo.setTotalRecordCount(totalCount); //전체 게시물 건 수
+		paginationInfo.setCurrentPageNo(pageNo); // 현재 페이지 번호
+		paginationInfo.setRecordCountPerPage(10); // 현재 페이지 글개수
+		paginationInfo.setPageSize(10); // 페이징 리스트의 사이즈
+		// 전체 글 수 가져오는 명령문장
+		int totalCount = boardService.totalCount();
+		paginationInfo.setTotalRecordCount(totalCount); // 전체 게시물 건 수
 
-		int firstRecordIndex = paginationInfo.getFirstRecordIndex();//시작위치
-		
-		int recordCountPerPage = paginationInfo.getRecordCountPerPage();//페이지당 몇개?
-		
-		//System.out.println(firstRecordIndex);
-		//System.out.println(recordCountPerPage);
-		//System.out.println(pageNo);
-		//System.out.println(totalCount);
- 		
-	    PageDTO page = new PageDTO();
-	    page.setFirstRecordIndex(firstRecordIndex);
-	    page.setRecordCountPerPage(recordCountPerPage);
-		
-		//보드서비스 수정합니다.
-	    List<BoardDTO> list =boardService.boardList(page);
-	    
-	    
-	    
+		int firstRecordIndex = paginationInfo.getFirstRecordIndex();// 시작위치
+
+		int recordCountPerPage = paginationInfo.getRecordCountPerPage();// 페이지당 몇개?
+
+		// System.out.println(firstRecordIndex);
+		// System.out.println(recordCountPerPage);
+		// System.out.println(pageNo);
+		// System.out.println(totalCount);
+
+		PageDTO page = new PageDTO();
+		page.setFirstRecordIndex(firstRecordIndex);
+		page.setRecordCountPerPage(recordCountPerPage);
+
+		// 보드서비스 수정합니다.
+		List<BoardDTO> list = boardService.boardList(page);
+
 		model.addAttribute("list", list);
-		//페이징 관련 정보가 있는 PaginationInfo 객체를 모델에 반드시 넣어준다.
+		// 페이징 관련 정보가 있는 PaginationInfo 객체를 모델에 반드시 넣어준다.
 		model.addAttribute("paginationInfo", paginationInfo);
 
 //모델은 값만전송 모델앤뷰는 값이랑 뷰랑 묶어서 전송		
@@ -85,12 +83,12 @@ public class BoardController {
 		dto.setBno(bno);
 
 		BoardDTO result = boardService.detail(dto);
-        System.out.println(result.getCommentcount());
-        if(result.getCommentcount()>0) {
-        	//데이터베이스에 물어봐서 jsp로 보냅니다.
-           List<Map<String, Object>> commentsList = boardService.commentsList(bno);
-        	model.addAttribute("commentsList", commentsList); 	
-        }        
+		//System.out.println(result.getCommentcount());
+		if (result.getCommentcount() > 0) {
+			// 데이터베이스에 물어봐서 jsp로 보냅니다.
+			List<Map<String, Object>> commentsList = boardService.commentsList(bno);
+			model.addAttribute("commentsList", commentsList);
+		}
 		model.addAttribute("dto", result);
 
 		return "detail";
@@ -124,7 +122,6 @@ public class BoardController {
 
 			BoardDTO dto = new BoardDTO();
 
-
 			dto.setBtitle(request.getParameter("title"));
 			dto.setBcontent(request.getParameter("content"));
 			// 세션에서 불러오겠습니다.
@@ -133,7 +130,7 @@ public class BoardController {
 			dto.setUuid(UUID.randomUUID().toString());
 			System.out.println(dto.getUuid());
 			System.out.println(dto.getUuid().length());
-			
+
 			// Service -> DAO -> mybatis -> DB로 보내서 저장하기
 			boardService.write(dto);
 
@@ -166,8 +163,7 @@ public class BoardController {
 
 		}
 	}
-	
-	
+
 	@GetMapping("/edit")
 	public ModelAndView edit(HttpServletRequest request) {
 		// 로그인 하지 않으면 로그인화면으로 던져주세요.
@@ -211,31 +207,39 @@ public class BoardController {
 	}
 
 	@GetMapping("/cdel")
-	   public String cdel(@RequestParam Map<String, Object> map, HttpSession session) {
-	      //로그인 여부 검사
-	      if(session.getAttribute("mid") != null) {
-	         System.out.println(map);
-	         if(map.get("bno") != null && map.get("cno") != null && !map.get("bno").equals("") && !map.get("cno").equals("") && 
-	            util.isNum(map.get("bno")) && util.isNum(map.get("cno"))) {
-	            map.put("mid", session.getAttribute("mid"));
-	            int result = boardService.cdel(map);
-	            System.out.println("삭제 결과 : " + result);
-	         }
-	      }
-	      return "redirect:detail?bno=" + map.get("bno");
-	   }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public String cdel(@RequestParam Map<String, Object> map, HttpSession session) {
+		// 로그인 여부 검사
+		if (session.getAttribute("mid") != null) {
+			System.out.println(map);
+			if (map.get("bno") != null && map.get("cno") != null && !map.get("bno").equals("")
+					&& !map.get("cno").equals("") && util.isNum(map.get("bno")) && util.isNum(map.get("cno"))) {
+				map.put("mid", session.getAttribute("mid"));
+				int result = boardService.cdel(map);
+				//System.out.println("삭제 결과 : " + result);
+			}
+		}
+		return "redirect:detail?bno=" + map.get("bno");
+	}
+
+	@PostMapping("/cedit")
+	public String cedit(@RequestParam Map<String, Object> map, HttpSession session) {
+		if (session.getAttribute("mid") != null) {
+			if (map.get("bno") != null && !(map.get("bno").equals("")) && map.containsKey("cno")
+					&& !(map.get("cno").equals(""))) {
+				map.put("mid", session.getAttribute("mid"));
+				System.out.println(map);
+				int result = boardService.cedit(map);
+			   System.out.println(result);
+				
+				return "redirect:/detail?bno=" + map.get("bno");
+			} else {
+				return "redirect:/board";
+			}
+		} else {
+
+			return "redirect:/login";
+
+		}
+	}
+
 }
-
-
-

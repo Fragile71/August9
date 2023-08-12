@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+h1{
+	text-align: left;
+}
+
+.write-div {
+	float: none;
+	margin: 0 auto;
+	width: 600px;
+	background-color:;
+	padding: 10px;
+}
+
+
+
+.write-div textarea {
+  width: 100%;
+    height: 6.25em;
+    border: none;
+    resize: none;
+}
+
+.btn {
+	border-radius: 30px;
+	float: right;
+	
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 100px 100px;
+  grid-gap: 10px;
+}
+
+.write-div {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.left-menu{
+ grid-column: 2;
+  grid-row: 1;
+}
+
+
+
+.home{
+	text-align: left;
+	
+}

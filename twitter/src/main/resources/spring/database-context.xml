@@ -3,13 +3,18 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+
+
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="username" value="c23b_02"></property>
-		<property name="password" value="!@ki8689216"></property>
-		<property name="url" value="jdbc:mariadb://wisejia.iptime.org:3306/c23b_02"></property>
-		<property name="driverClassName" value="org.mariadb.jdbc.Driver"></property>
+		<property name="username" value="twitter"></property>
+		<property name="password" value="0123456"></property>
+		<property name="url"
+			value="jdbc:mariadb://wisejia.iptime.org:3306/twitter"></property>
+		<property name="driverClassName"
+			value="org.mariadb.jdbc.Driver"></property>
 	</bean>
+
 
 	<bean id="sqlSessionFactoryBean"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -20,14 +25,12 @@
 			value="classpath:/mybatis/config/mybatisConfig.xml"></property>
 	</bean>
 
+
 	<bean id="sqlSession"
 		class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg name="sqlSessionFactory"
 			ref="sqlSessionFactoryBean"></constructor-arg>
 	</bean>
-
-
-
 
 
 </beans>
